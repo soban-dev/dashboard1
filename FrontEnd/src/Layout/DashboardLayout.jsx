@@ -5,6 +5,7 @@ import Header from "../Components/header";
 import Sidebar from "../Components/sidebar";
 import DashboardContent from "../pages/Dashboard/DashboardContent";
 import Invoices from "../pages/Billing/BillingContent";
+import TableContent from "../pages/Table/TableContent";
 
 function DashboardLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State for Sidebar toggle
@@ -76,6 +77,7 @@ function DashboardLayout() {
           <Routes>
             <Route path="/" element={<DashboardContent />} />
             <Route path="/billing" element={<Invoices />} />
+            <Route path="/tables" element={<TableContent />} />
             {/* Add additional routes as needed */}
           </Routes>
         </Box>
