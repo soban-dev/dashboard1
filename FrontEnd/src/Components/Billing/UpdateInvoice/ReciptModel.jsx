@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   Box,
   Table,
@@ -26,10 +27,11 @@ const ReceiptModal = ({
   setClientName,
 }) => {
   const [message, setMessage] = useState(""); // To store error or success messages
-//apply discount
   const calculateTotalAmount = () => {
-    return inventory.reduce((total, row) => total + row.price, 0); // Calculate total amount
+    console.log("discount is " , discount)
+    return inventory.reduce((total, row) => total + (row.price * (100 - 10) / 100), 0);
   };
+  
 
   const handleGenerateReceipt = async () => {
     if (!clientName) {

@@ -214,7 +214,7 @@ const BottomSection = ({ itemArray = [] }) => {
         setCreatedBy={setCreatedBy}
         clientName={clientName}
         setClientName={setClientName}
-        discount = {setDiscount}
+        discount = {discount}
       />
     </Box>
   );

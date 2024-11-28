@@ -34,7 +34,7 @@ function Sidebar({ isOpen, toggleSidebar }) {
             backgroundColor: "#1F2937", // Sidebar background color
             color: "#EDEDED",
             boxSizing: "border-box", // Include padding and border in width
-            overflow: "hidden", // Prevent scrollbars
+            overflow: "auto", // Prevent scrollbars
             padding:'19px',
             // Margin:'10px',
             borderRadius:'15px',

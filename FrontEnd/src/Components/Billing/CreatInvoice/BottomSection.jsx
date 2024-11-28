@@ -151,59 +151,72 @@ const BottomSection = ({ itemArray = [] }) => {
 
       {/* Buttons and Error Message */}
       <Stack direction="row" spacing={2} mt={2} justifyContent="space-between" alignItems="center">
-        {/* Left-aligned: Add to Cart and Error Message */}
-        <Stack direction="row" alignItems="center" spacing={2}>
-          <Button
-            variant="contained"
-            sx={{
-              height: "50px",
-              borderRadius: "25px",
-              color: "#fff",
-              fontWeight: "bold",
-              backgroundColor: "#1e88e5", // Brighter blue
-              textTransform: "none",
-              fontSize: "16px", // Improved font size
-              "&:hover": {
-                backgroundColor: "#1565c0", // Slightly darker blue on hover
-              },
-            }}
-            onClick={handleAddToCart}
-          >
-            Add to Cart
-          </Button>
-          {errorMessage && (
-            <Typography
-              variant="body2"
-              sx={{
-                color: "red", // Red text for error
-                fontSize: "14px", // Smaller font for error message
-              }}
-            >
-              {errorMessage}
-            </Typography>
-          )}
-        </Stack>
-
-        {/* Right-aligned: Generate Receipt Button */}
+      {/* Left-aligned: Add to Cart and Error Message */}
+      <Stack direction="row" alignItems="center" spacing={2}>
         <Button
           variant="contained"
           sx={{
-            height: "50px",
+            height: { xs: "40px", md: "50px" }, // 40px height for mobile, 50px for desktop
+            padding: { xs: "8px 16px", md: "12px 24px" }, // Adjust padding for mobile
             borderRadius: "25px",
             color: "#fff",
             fontWeight: "bold",
             backgroundColor: "#1e88e5", // Brighter blue
             textTransform: "none",
-            fontSize: "16px", // Improved font size
+            fontSize: { xs: "14px", md: "16px" }, // Smaller font size for mobile
             "&:hover": {
               backgroundColor: "#1565c0", // Slightly darker blue on hover
             },
           }}
-          onClick={handleOpenModal}
+          onClick={handleAddToCart}
         >
-          Generate Receipt
+          Add to Cart
         </Button>
+        {errorMessage && (
+          <Typography
+            variant="body2"
+            sx={{
+              color: "red", // Red text for error
+              fontSize: { xs: "12px", md: "14px" }, // Smaller font for mobile
+            }}
+          >
+            {/* Short message in mobile view */}
+            {errorMessage.length > 0 ? (
+              <>
+                {errorMessage.length > 15 ? (
+                  <>{`Something went wrong`}</> // Shorter message for mobile view
+                ) : (
+                  errorMessage
+                )}
+              </>
+            ) : (
+              ""
+            )}
+          </Typography>
+        )}
       </Stack>
+
+      {/* Right-aligned: Generate Receipt Button */}
+      <Button
+        variant="contained"
+        sx={{
+          height: { xs: "40px", md: "50px" }, // Adjust button height for mobile
+          padding: { xs: "8px 16px", md: "12px 24px" }, // Adjust padding for mobile
+          borderRadius: "25px",
+          color: "#fff",
+          fontWeight: "bold",
+          backgroundColor: "#1e88e5", // Brighter blue
+          textTransform: "none",
+          fontSize: { xs: "14px", md: "16px" }, // Adjust font size for mobile
+          "&:hover": {
+            backgroundColor: "#1565c0", // Slightly darker blue on hover
+          },
+        }}
+        onClick={handleOpenModal}
+      >
+        Generate Receipt
+      </Button>
+    </Stack>
 
       {/* Receipt Modal */}
       <ReceiptModal

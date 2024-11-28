@@ -6,7 +6,7 @@ import BottomSection from "./BottomSection";
 import backgroundImage from "../../../assets/background.jpg";
 const CreateInvoice = ({ onClose }) => {
   const [itemArray, setItemArray] = useState([]);
-  // const [discount, setDiscount] = useState(0);
+  const [discount, setDiscount] = useState(0);
 
 
   return (
@@ -55,9 +55,9 @@ const CreateInvoice = ({ onClose }) => {
       >
        <TopSection
         itemArray={itemArray}
-        // discount={discount}
+        discount={discount}
         setItemArray={setItemArray}
-        // setDiscount={setDiscount}
+        setDiscount={setDiscount}
       />
 
       {/* Step 3: Pass itemArray and discount to BottomSection */}

@@ -278,9 +278,11 @@ const TopSection = ({ setItemArray }) => {
               background: "linear-gradient(90deg, #1E90FF, #007BFF)", // Gradient blue background
               color: "#FFF", // White text color
               fontWeight: "bold", // Bold text
-              fontFamily: "Roboto, sans-serif", // Modern font
+              fontFamily: "Roboto, sans-serif",
+              padding: 0, // Modern font
               "&:hover": {
                 background: "linear-gradient(90deg, #007BFF, #0056B3)", // Slightly darker gradient on hover
+                
               },
             }}
             onClick={(event) => toggleEditing(event)}
@@ -336,7 +338,7 @@ const TopSection = ({ setItemArray }) => {
         </Box>
 
         {/* Price Button */}
-        <Box sx={{ textAlign: "center" }}>
+        <Box sx={{ textAlign: "center", display: { xs: "none", sm: "block" }, }}>
           <Button
             variant="contained" // Use "contained" for filled button
             sx={{
@@ -348,7 +350,8 @@ const TopSection = ({ setItemArray }) => {
               fontWeight: "bold", // Bold text
               fontFamily: "Roboto, sans-serif", // Modern font
               "&:hover": {
-                background: "linear-gradient(90deg, #007BFF, #0056B3)", // Slightly darker gradient on hover
+                background: "linear-gradient(90deg, #007BFF, #0056B3)",
+                 // Slightly darker gradient on hover
               },
             }}
           >
@@ -376,6 +379,7 @@ const TopSection = ({ setItemArray }) => {
               fontSize: "14px", // Slightly smaller font
               background: "linear-gradient(90deg, #1E90FF, #007BFF)", // Gradient blue background
               color: "#FFF", // White text color
+              padding: 0,
               fontWeight: "bold", // Bold text
               fontFamily: "Roboto, sans-serif", // Modern font
               "&:hover": {

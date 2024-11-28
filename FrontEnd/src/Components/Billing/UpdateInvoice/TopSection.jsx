@@ -3,7 +3,7 @@ import { Box, Stack, TextField, Button, Typography, MenuItem } from "@mui/materi
 import axios from "axios";
 
 const TopSection = ({ setItemArray }) => {
-  const [discount, setDiscount] = useState(0); // Discount value store karne ke liye state
+  const [discount, setDiscount] = useState(0); // Declare
 
   const handleDiscountChange = (e) => {
     const value = e.target.value; // Input value ko capture kare
@@ -97,7 +97,8 @@ const TopSection = ({ setItemArray }) => {
       name: searchValue,
       quantity: itemValue || 0,
       price_per_unit: selectedItem?.selling_price_per_unit || 0,
-      price: itemValue * selectedItem?.selling_price_per_unit};
+      price: itemValue * selectedItem?.selling_price_per_unit
+    };
 
     setItemArray((prevArray) => {
       const existingIndex = prevArray.findIndex((item) => item.name === searchValue);
@@ -116,20 +117,49 @@ const TopSection = ({ setItemArray }) => {
 
   return (
     <Box>
-      <Typography
-  variant="h4"
-  textAlign="center"
-  mb={3}
-  sx={{
-    fontFamily: "'Roboto', sans-serif", // Modern and clean font
-    fontWeight: "bold", // Bold weight for emphasis
-    fontSize: "28px", // Adjusted font size for better readability
-    letterSpacing: "1px", // Slight spacing for a polished look
-    color: "white", // Optional: Blue color for alignment with the theme
-  }}
->
-  Update Invoice
-</Typography>
+     <Stack direction="row" spacing={5} alignItems="center">
+        {/* Left side TextField */}
+        <TextField
+          label="Old Invoice ID"
+          variant="outlined"
+          sx={{
+            width: '250px',
+            '& .MuiInputLabel-root': {
+              color: 'white',
+            },
+            '& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                borderColor: 'white',
+              },
+              '&:hover fieldset': {
+                borderColor: '#64b5f6', // Optional hover color
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: '#64b5f6',
+              },
+              color: 'white',
+            },
+            input: {
+              color: 'white',
+            },
+          }}
+        />
+
+        {/* Centered Typography */}
+        <Typography
+          variant="h4"
+          textAlign="center"
+          sx={{
+            fontFamily: "'Roboto', sans-serif",
+            fontWeight: 'bold',
+            fontSize: '28px',
+            letterSpacing: '1px',
+            color: 'white',
+          }}
+        >
+          Update Invoice
+        </Typography>
+      </Stack>
 
       <Stack
         direction="column" // Make it vertical layout for responsiveness

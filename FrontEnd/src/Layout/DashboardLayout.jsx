@@ -6,6 +6,8 @@ import Sidebar from "../Components/sidebar";
 import DashboardContent from "../pages/Dashboard/DashboardContent";
 import Invoices from "../pages/Billing/BillingContent";
 import TableContent from "../pages/Table/TableContent";
+import ProfileComponent from "../pages/Profile/ProfileContent";
+import NotificationComponent from "../pages/Notification/NotificationContent";
 
 function DashboardLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State for Sidebar toggle
@@ -78,6 +80,8 @@ function DashboardLayout() {
             <Route path="/" element={<DashboardContent />} />
             <Route path="/billing" element={<Invoices />} />
             <Route path="/tables" element={<TableContent />} />
+            <Route path="/profile" element={<ProfileComponent />} />
+            <Route path="/notifications" element={<NotificationComponent />} />
             {/* Add additional routes as needed */}
           </Routes>
         </Box>
