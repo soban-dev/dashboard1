@@ -14,7 +14,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import GoogleIcon from "@mui/icons-material/Google";
 import { styled } from "@mui/system";
-import { Link } from "react-router-dom"; // Import the Link component
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
 import backgroundImage from "../../assets/bg-sign-up-cover.jpeg";
 import axios from "axios"; // Import axios for API request
 
@@ -106,6 +106,8 @@ export default function EmployRegistration() {
     cnic: "",
   });
 
+  const navigate = useNavigate(); // Initialize the useNavigate hook to handle navigation
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -117,23 +119,19 @@ export default function EmployRegistration() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Store data in an array format (optional)
-    const formArray = [
-      { name: formData.name },
-      { username: formData.username },
-      { email: formData.email },
-      { password: formData.password },
-      { phone: formData.phone },
-      { address: formData.address },
-      { cnic: formData.cnic },
-    ];
-    console.log("Form Data:", formArray); // Console log form data as array
-
     try {
       const response = await axios.post("http://localhost:3000/api/auth/signup", formData);
       console.log("Server Response:", response.data); // Console log server response
+
+      if (response.data.success) {
+        // If signup is successful, navigate to /signup
+        navigate("/sign-in");
+      } else {
+        alert("Signup failed. Please try again.");
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
+      alert("An error occurred. Please try again.");
     }
   };
 

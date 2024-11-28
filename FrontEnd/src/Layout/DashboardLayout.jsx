@@ -10,7 +10,7 @@ import ProfileComponent from "../pages/Profile/ProfileContent";
 import NotificationComponent from "../pages/Notification/NotificationContent";
 
 function DashboardLayout() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State for Sidebar toggle
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); 
 
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);

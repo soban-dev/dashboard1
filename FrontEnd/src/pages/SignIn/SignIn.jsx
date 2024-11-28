@@ -104,8 +104,17 @@ export default function SignIn() {
 
       const result = await response.json();
       console.log("Response from backend:", result); // Console log response
+
+      // Check if the login was successful based on response from backend
+      if (result.success === true) {
+        // Navigate to home page if login is successful
+        navigate("/");
+      } else {
+        // Handle failed login (optional: display message, etc.)
+        console.log("Login failed", result.message);
+      }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error:", error); // Handle errors during the fetch
     }
   };
 
@@ -179,7 +188,7 @@ export default function SignIn() {
               variant="body2"
               align="center"
               sx={{ color: "#1976d2", cursor: "pointer" }}
-              onClick={() => navigate("/sign-up")} // Redirect on click
+              onClick={() => navigate("/sign-up")} // Redirect to sign-up page
             >
               Don’t have an account? Sign up
             </Typography>

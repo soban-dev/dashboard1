@@ -75,10 +75,10 @@ const TopSection = ({ setItemArray }) => {
     setIsEditing((prev) => !prev);
   
     if (isEditing) {
-      updateItemArray(); // Your custom logic
+      updateItemArray();
     }
   };
-  
+
 
   const handleItemInputChange = (event) => {
     setItemValue(event.target.value);
@@ -377,13 +377,13 @@ const TopSection = ({ setItemArray }) => {
               height: "55px", // Reduced height
               width: "130px", // Reduced width
               fontSize: "14px", // Slightly smaller font
-              background: "linear-gradient(90deg, #1E90FF, #007BFF)", // Gradient blue background
-              color: "#FFF", // White text color
+              background: "linear-gradient(90deg, #1E90FF, #007BFF)", 
+              color: "#FFF", 
               padding: 0,
-              fontWeight: "bold", // Bold text
-              fontFamily: "Roboto, sans-serif", // Modern font
+              fontWeight: "bold", 
+              fontFamily: "Roboto, sans-serif", 
               "&:hover": {
-                background: "linear-gradient(90deg, #007BFF, #0056B3)", // Slightly darker gradient on hover
+                background: "linear-gradient(90deg, #007BFF, #0056B3)", 
               },
             }}
           >

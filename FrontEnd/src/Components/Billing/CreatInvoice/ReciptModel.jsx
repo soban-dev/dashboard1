@@ -41,7 +41,7 @@ const ReceiptModal = ({
     }
 
     const data = {
-      discount: discount ?? 0,
+      percentdiscount: discount ,
       customername: clientName,
       items: inventory,
       total: calculateTotalAmount(),
