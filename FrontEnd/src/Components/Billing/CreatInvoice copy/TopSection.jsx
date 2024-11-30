@@ -22,7 +22,7 @@ const TopSection = ({ setItemArray }) => {
       if (query.length === 0) {
         setSuggestions([]);
       } else if (query.length > 1) {
-        const response = await axios.post("http://localhost:3000/api/auth/searchitem", {
+        const response = await axios.post("http://localhost:3000/api/inventory/searchitem", {
           name: query,
         });
         setSuggestions(response.data);
@@ -39,7 +39,7 @@ const TopSection = ({ setItemArray }) => {
 
   const handleSuggestionClick = async (suggestion) => {
     try {
-      const response = await axios.post("http://localhost:3000/api/auth/fetchitem", {
+      const response = await axios.post("http://localhost:3000/api/inventory/fetchitem", {
         name: suggestion.name,
       });
       setSelectedItem(response.data);
@@ -75,10 +75,10 @@ const TopSection = ({ setItemArray }) => {
     setIsEditing((prev) => !prev);
   
     if (isEditing) {
-      updateItemArray(); // Your custom logic
+      updateItemArray();
     }
   };
-  
+
 
   const handleItemInputChange = (event) => {
     setItemValue(event.target.value);
@@ -117,49 +117,20 @@ const TopSection = ({ setItemArray }) => {
 
   return (
     <Box>
-     <Stack direction="row" spacing={5} alignItems="center">
-        {/* Left side TextField */}
-        <TextField
-          label="Old Invoice ID"
-          variant="outlined"
-          sx={{
-            width: '250px',
-            '& .MuiInputLabel-root': {
-              color: 'white',
-            },
-            '& .MuiOutlinedInput-root': {
-              '& fieldset': {
-                borderColor: 'white',
-              },
-              '&:hover fieldset': {
-                borderColor: '#64b5f6', // Optional hover color
-              },
-              '&.Mui-focused fieldset': {
-                borderColor: '#64b5f6',
-              },
-              color: 'white',
-            },
-            input: {
-              color: 'white',
-            },
-          }}
-        />
-
-        {/* Centered Typography */}
-        <Typography
-          variant="h4"
-          textAlign="center"
-          sx={{
-            fontFamily: "'Roboto', sans-serif",
-            fontWeight: 'bold',
-            fontSize: '28px',
-            letterSpacing: '1px',
-            color: 'white',
-          }}
-        >
-          Update Invoice
-        </Typography>
-      </Stack>
+      <Typography
+  variant="h4"
+  textAlign="center"
+  mb={3}
+  sx={{
+    fontFamily: "'Roboto', sans-serif", // Modern and clean font
+    fontWeight: "bold", // Bold weight for emphasis
+    fontSize: "28px", // Adjusted font size for better readability
+    letterSpacing: "1px", // Slight spacing for a polished look
+    color: "white", // Optional: Blue color for alignment with the theme
+  }}
+>
+  Create Invoice
+</Typography>
 
       <Stack
         direction="column" // Make it vertical layout for responsiveness
@@ -307,9 +278,11 @@ const TopSection = ({ setItemArray }) => {
               background: "linear-gradient(90deg, #1E90FF, #007BFF)", // Gradient blue background
               color: "#FFF", // White text color
               fontWeight: "bold", // Bold text
-              fontFamily: "Roboto, sans-serif", // Modern font
+              fontFamily: "Roboto, sans-serif",
+              padding: 0, // Modern font
               "&:hover": {
                 background: "linear-gradient(90deg, #007BFF, #0056B3)", // Slightly darker gradient on hover
+                
               },
             }}
             onClick={(event) => toggleEditing(event)}
@@ -365,7 +338,7 @@ const TopSection = ({ setItemArray }) => {
         </Box>
 
         {/* Price Button */}
-        <Box sx={{ textAlign: "center" }}>
+        <Box sx={{ textAlign: "center", display: { xs: "none", sm: "block" }, }}>
           <Button
             variant="contained" // Use "contained" for filled button
             sx={{
@@ -377,7 +350,8 @@ const TopSection = ({ setItemArray }) => {
               fontWeight: "bold", // Bold text
               fontFamily: "Roboto, sans-serif", // Modern font
               "&:hover": {
-                background: "linear-gradient(90deg, #007BFF, #0056B3)", // Slightly darker gradient on hover
+                background: "linear-gradient(90deg, #007BFF, #0056B3)",
+                 // Slightly darker gradient on hover
               },
             }}
           >
@@ -403,12 +377,13 @@ const TopSection = ({ setItemArray }) => {
               height: "55px", // Reduced height
               width: "130px", // Reduced width
               fontSize: "14px", // Slightly smaller font
-              background: "linear-gradient(90deg, #1E90FF, #007BFF)", // Gradient blue background
-              color: "#FFF", // White text color
-              fontWeight: "bold", // Bold text
-              fontFamily: "Roboto, sans-serif", // Modern font
+              background: "linear-gradient(90deg, #1E90FF, #007BFF)", 
+              color: "#FFF", 
+              padding: 0,
+              fontWeight: "bold", 
+              fontFamily: "Roboto, sans-serif", 
               "&:hover": {
-                background: "linear-gradient(90deg, #007BFF, #0056B3)", // Slightly darker gradient on hover
+                background: "linear-gradient(90deg, #007BFF, #0056B3)", 
               },
             }}
           >

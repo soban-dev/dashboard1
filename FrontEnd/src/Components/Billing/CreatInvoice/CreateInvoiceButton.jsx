@@ -6,7 +6,10 @@ const CreateInvoiceButton = () => {
   const [open, setOpen] = useState(false); // Modal open/close state
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  // const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false); // Close the invoice component
+  };
 
   return (
     <Box
@@ -69,7 +72,7 @@ const CreateInvoiceButton = () => {
   sx={{
     width: "100%",
     maxWidth: 1000,
-    marginLeft: { xs: "0", md: "220px" }, // Remove marginLeft on tablet and mobile
+    // marginLeft: { xs: "0", md: "220px" }, // Remove marginLeft on tablet and mobile
     borderRadius: "10px", // Rounded corners
     padding: { xs: 0, md: 0 }, // Smaller padding for mobile and tablet
     height: { xs: "auto", sm: "90vh", md: "auto" }, // Adjust height for smaller screens

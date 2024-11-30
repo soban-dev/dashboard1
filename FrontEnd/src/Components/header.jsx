@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -83,6 +84,9 @@ function Header({ toggleSidebar }) {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+    
+  
+    const navigate = useNavigate(); // useNavigate hook to navigate
 
   return (
     <AppBar
@@ -152,16 +156,30 @@ function Header({ toggleSidebar }) {
         >
           {/* Icons */}
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <IconButton sx={{ color: "#AAA" }}>
-              <PersonIcon />
-            </IconButton>
-            <IconButton sx={{ color: "#AAA" }}>
-              <SettingsIcon />
-            </IconButton>
-            <IconButton sx={{ color: "#AAA" }}>
-              <NotificationsIcon />
-            </IconButton>
-          </Box>
+      {/* Person Icon */}
+      <IconButton
+        sx={{ color: "#AAA" }}
+        onClick={() => navigate("/profile")} // Navigate to /profile
+      >
+        <PersonIcon />
+      </IconButton>
+
+      {/* Settings Icon */}
+      <IconButton
+        sx={{ color: "#AAA" }}
+        onClick={() => navigate("/profile")} // Navigate to /profile
+      >
+        <SettingsIcon />
+      </IconButton>
+
+      {/* Notifications Icon */}
+      <IconButton
+        sx={{ color: "#AAA" }}
+        onClick={() => navigate("/notifications")} // Navigate to /notifications
+      >
+        <NotificationsIcon />
+      </IconButton>          
+      </Box>
 
           {/* Search Bar */}
           <Search

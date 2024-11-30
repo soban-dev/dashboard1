@@ -7,6 +7,7 @@ import {
   ListItemText,
   Typography,
   Box,
+  Table,
 } from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import TableChartIcon from "@mui/icons-material/TableChart";
@@ -69,16 +70,29 @@ function Sidebar({ isOpen, toggleSidebar }) {
 }
 
 function SidebarContent({ location, toggleSidebar }) {
+  // const role = localStorage.getItem('role'); // Get the role from localStorage
+const role = "admin"
+  // Define the menu items with their respective roles
   const menuItems = [
-    { text: "Dashboard", icon: <DashboardIcon />, path: "/" },
-    { text: "Tables", icon: <TableChartIcon />, path: "/tables" },
-    { text: "Billing", icon: <ReceiptIcon />, path: "/billing" },
-    // { text: "RTL", icon: <LanguageIcon />, path: "/rtl" },
-    { text: "Notifications", icon: <NotificationsIcon />, path: "/notifications" },
-    { text: "Profile", icon: <PersonIcon />, path: "/profile" },
-    { text: "Sign In", icon: <LoginIcon />, path: "/sign-in" },
-    { text: "Sign Up", icon: <AppRegistrationIcon />, path: "/sign-up" },
+    { text: "Dashboard", icon: <DashboardIcon />, path: "/", role: "admin" },
+    { text: "Create Item", icon: <TableChartIcon />, path: "/tables",role: "admin" },
+    { text: "Billing", icon: <ReceiptIcon />, path: "/billing", role: "user" },
+    { text: "Notifications", icon: <NotificationsIcon />, path: "/notifications", role: "admin" },
+    { text: "Profile", icon: <PersonIcon />, path: "/profile", role: "user" },
+    { text: "Sign In", icon: <LoginIcon />, path: "/sign-in", role: "user" },
+    { text: "Sign Up", icon: <AppRegistrationIcon />, path: "/sign-up", role: "admin" },
+    
   ];
+
+  // Filter menu items based on role (show all for admin, show only user-related items for user)
+  const filteredMenuItems = menuItems.filter(item => {
+    if (role === "admin") {
+      return true; // Show all items for admin
+    } else if (role === "user") {
+      return item.role === "user"; // Show only user-related items for user
+    }
+    return false; // In case the role is not recognized
+  });
 
   return (
     <Box
@@ -102,7 +116,7 @@ function SidebarContent({ location, toggleSidebar }) {
 
       {/* Menu Items */}
       <List>
-        {menuItems.map((item) => (
+        {filteredMenuItems.map((item) => (
           <ListItem
             button
             key={item.text}
@@ -132,5 +146,6 @@ function SidebarContent({ location, toggleSidebar }) {
     </Box>
   );
 }
+
 
 export default Sidebar;

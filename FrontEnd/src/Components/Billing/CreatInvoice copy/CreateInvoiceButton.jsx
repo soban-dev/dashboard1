@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { Box, Button, Modal, Typography } from "@mui/material";
-import CreateInvoice from "./UpdateItem";
+import CreateInvoice from "./CreateInvoice";
 
 const CreateInvoiceButton = () => {
   const [open, setOpen] = useState(false); // Modal open/close state
 
   const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
-  const handleClose = () => {
-    setOpen(false); // Close the invoice component
-  };
+  const handleClose = () => setOpen(false);
 
   return (
     <Box
@@ -18,6 +15,7 @@ const CreateInvoiceButton = () => {
         flexDirection: "column",
         alignItems: "center", // Center align the content
         justifyContent: "center",
+        marginLeft:'0px',
          // Optional to vertically center on the page
       }}
     >
@@ -51,7 +49,7 @@ const CreateInvoiceButton = () => {
             fontSize: "14px",
           }}
         >
-          Click above to Update an Item.
+          Click above to create a new invoice.
         </Typography>
       </Box>
 
@@ -72,7 +70,7 @@ const CreateInvoiceButton = () => {
   sx={{
     width: "100%",
     maxWidth: 1000,
-    // marginLeft: { xs: "0", md: "220px" }, // Remove marginLeft on tablet and mobile
+    marginLeft: { xs: "0", md: "220px" }, // Remove marginLeft on tablet and mobile
     borderRadius: "10px", // Rounded corners
     padding: { xs: 0, md: 0 }, // Smaller padding for mobile and tablet
     height: { xs: "auto", sm: "90vh", md: "auto" }, // Adjust height for smaller screens

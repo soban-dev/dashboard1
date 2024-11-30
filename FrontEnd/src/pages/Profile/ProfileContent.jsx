@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef,useEffect } from "react";
+import axios from "axios";
 import {
   Box,
   Typography,
@@ -21,6 +22,20 @@ const ProfileComponent = () => {
   );
 
   const textFieldRef = useRef(null);
+
+  // Fetch data from backend on component mount
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const response = await axios.get("http://localhost3000/profile");
+        console.log("Profile Data:", response.data);
+      } catch (error) {
+        console.error("Error fetching profile data:", error);
+      }
+    };
+
+    fetchProfileData();
+  }, []); // Empty dependency array ensures the effect runs only once on mount
 
   // Toggle edit mode
   const handleEditClick = () => {

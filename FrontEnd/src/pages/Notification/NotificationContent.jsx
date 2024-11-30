@@ -112,54 +112,67 @@ const NotificationComponent = () => {
         {notifications.length > 0 ? (
           notifications.map((notification, index) => (
             <Alert
-              key={index}
-              sx={{
-                backgroundColor: "#F44336",
-                color: "white",
-                padding: "15px 25px",
-                borderRadius: "10px",
-                fontWeight: "bold",
-                boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-              action={
-                <IconButton
-                  size="small"
-                  aria-label="close"
-                  color="inherit"
-                  onClick={() => handleClose(index)}
-                  sx={{
-                    position: "absolute",
-                    top: "8px",
-                    right: "8px",
-                    color: "white",
-                  }}
-                >
-                  <CloseIcon fontSize="small" />
-                </IconButton>
-              }
-            >
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                <Typography sx={{ fontWeight: "bold" }}>{notification.message}</Typography>
-                <Button
-                  variant="contained"
-                  sx={{
-                    backgroundColor: "#4CAF50",
-                    color: "white",
-                    fontWeight: "bold",
-                    padding: "8px 16px",
-                    marginLeft: "60px",
-                    borderRadius: "8px",
-                    textTransform: "none",
-                  }}
-                  onClick={() => handleVerify(notification.id, notification.username)} // Pass id and username to handleVerify
-                >
-                  Verify
-                </Button>
-              </Box>
-            </Alert>
+  key={index}
+  sx={{
+    backgroundColor: "#F44336",
+    color: "white",
+    padding: "15px 25px",
+    borderRadius: "10px",
+    fontWeight: "bold",
+    boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
+    display: "flex",
+    justifyContent: "space-between", // Space between message and button
+    alignItems: "center",
+    position: "relative", // For positioning close button
+  }}
+  action={
+    <IconButton
+      size="small"
+      aria-label="close"
+      color="inherit"
+      onClick={() => handleClose(index)}
+      sx={{
+        position: "absolute",
+        top: "8px",
+        right: "8px",
+        color: "white",
+      }}
+    >
+      <CloseIcon fontSize="small" />
+    </IconButton>
+  }
+>
+  <Box
+    sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      width: "100%",
+    }}
+  >
+    <Typography sx={{ fontWeight: "bold", marginRight: "16px" }}>
+      {notification.message}
+    </Typography>
+
+    <Button
+      variant="contained"
+      sx={{
+        backgroundColor: "#4CAF50",
+        color: "white",
+        fontWeight: "bold",
+        padding: "4px 16px",
+        borderRadius: "8px",
+        textTransform: "none",
+        marginLeft:'190px',
+        // border:'1px solid #000000',
+      }}
+      onClick={() => handleVerify(notification.id, notification.username)} // Pass id and username to handleVerify
+    >
+      Verify
+    </Button>
+  </Box>
+</Alert>
+
           ))
         ) : (
           <Typography variant="body1" sx={{ color: "#A0AEC0", textAlign: "center" }}>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import {
   Box,
   Table,
@@ -27,11 +26,15 @@ const ReceiptModal = ({
   setClientName,
 }) => {
   const [message, setMessage] = useState(""); // To store error or success messages
+
   const calculateTotalAmount = () => {
-    console.log("discount is " , discount)
-    return inventory.reduce((total, row) => total + (row.price * (100 - 10) / 100), 0);
+    return inventory.reduce((total, row) => total + row.totalAmount, 0);
   };
-  
+  const calculateTotalAmountWithDiscount = () => {
+    const total = inventory.reduce((total, row) => total + row.totalAmount, 0); // Sum up all totalAmount values
+    const discountedTotal = total - (total * discount) / 100; // Apply the discount
+    return discountedTotal.toFixed(2); // Round to two decimal places
+  };
 
   const handleGenerateReceipt = async () => {
     if (!clientName) {
@@ -40,10 +43,10 @@ const ReceiptModal = ({
     }
 
     const data = {
-      discount: discount ?? 0,
+      percentdiscount: discount ,
       customername: clientName,
       items: inventory,
-      total: calculateTotalAmount(), // Send total as an integer
+      total: calculateTotalAmount(),
     };
 
     try {
@@ -51,8 +54,7 @@ const ReceiptModal = ({
         "http://localhost:3000/api/auth/generatereceipt",
         data
       );
-
-      console.log("Backend Response:", response.data); // Log backend response
+      console.log("Backend Response:", response.data);
       setMessage("Receipt generated successfully!");
     } catch (error) {
       console.error("Error generating receipt:", error);
@@ -66,34 +68,39 @@ const ReceiptModal = ({
       onClose={onClose}
       aria-labelledby="receipt-modal-title"
       aria-describedby="receipt-modal-description"
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     >
       <Box
         sx={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
+          width: { xs: "90%", sm: "90%", md: "500px" },
+          marginTop:{ md: "40px" }, // Full width for mobile, fixed width for tablet/desktop
+          maxHeight: "90vh", // Limit height for scrollable content
           bgcolor: "#424242",
           boxShadow: 24,
-          p: 4,
-          width: 500,
-          borderRadius: 2,
+          p: { xs: 2, md: 4 },
+          // borderRadius: 2,
+          overflowY: "auto", // Enable scrolling for long content
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
+          border:'2px solid #ffffff44',
+          borderRadius:'10px',
         }}
       >
         <Typography
           variant="h6"
           id="receipt-modal-title"
           mb={2}
-          sx={{ color: "white" }} // White text for title
+          sx={{ color: "white" }}
         >
           Generate Receipt
         </Typography>
 
-        {/* Customer Name Field with White Border */}
+        {/* Customer Name Field */}
         <TextField
           fullWidth
           label="Customer Name"
@@ -101,18 +108,12 @@ const ReceiptModal = ({
           onChange={(e) => setClientName(e.target.value)}
           sx={{
             mb: 2,
-            input: { color: "white" }, // White text for input
-            label: { color: "white" }, // White label
+            input: { color: "white" },
+            label: { color: "white" },
             "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                borderColor: "white", // White border color
-              },
-              "&:hover fieldset": {
-                borderColor: "white", // White border on hover
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: "white", // White border when focused
-              },
+              "& fieldset": { borderColor: "white" },
+              "&:hover fieldset": { borderColor: "white" },
+              "&.Mui-focused fieldset": { borderColor: "white" },
             },
           }}
         />
@@ -136,26 +137,26 @@ const ReceiptModal = ({
                   Price
                 </TableCell>
                 <TableCell align="right" sx={{ color: "white" }}>
-                  Total Qty
+                  Qty
                 </TableCell>
                 <TableCell align="right" sx={{ color: "white" }}>
-                  Total Amount
+                  Amount
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {inventory?.length > 0 ? (
+              {inventory.length > 0 ? (
                 inventory.map((row, index) => (
                   <TableRow key={index}>
                     <TableCell sx={{ color: "white" }}>{row.name}</TableCell>
                     <TableCell align="right" sx={{ color: "white" }}>
-                      ${row.price_per_unit}
+                      ${row.price}
                     </TableCell>
                     <TableCell align="right" sx={{ color: "white" }}>
                       {row.quantity}
                     </TableCell>
                     <TableCell align="right" sx={{ color: "white" }}>
-                      ${row.price}
+                      ${row.totalAmount}
                     </TableCell>
                   </TableRow>
                 ))
@@ -171,12 +172,11 @@ const ReceiptModal = ({
         </TableContainer>
 
         {/* Total Amount */}
-        <Typography
-          variant="h6"
-          align="right"
-          sx={{ mb: 2, color: "white" }}
-        >
+        <Typography variant="h6" align="right" sx={{ mb: 2, color: "white" }}>
           Total: ${calculateTotalAmount()}
+        </Typography>
+        <Typography variant="h6" align="right" sx={{ mb: 2, color: "white" }}>
+          Total After Discount: ${calculateTotalAmountWithDiscount()}
         </Typography>
 
         {/* Error/Success Message */}

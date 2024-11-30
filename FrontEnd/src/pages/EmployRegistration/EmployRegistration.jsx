@@ -71,10 +71,17 @@ const SocialButtonsBox = styled(Box)(({ theme }) => ({
   gap: "16px",
   marginTop: "10px",
 
-  [theme.breakpoints.down("md")]: {
+  // Show icons for screens 1200px and above, hide below
+  [theme.breakpoints.up("lg")]: { // This targets screens larger than 1200px
+    display: "flex",
+  },
+
+  // Hide social icons for screens smaller than 1200px
+  [theme.breakpoints.down("lg")]: {
     display: "none",
   },
 }));
+
 
 const SocialButton = styled(Avatar)({
   backgroundColor: "white",

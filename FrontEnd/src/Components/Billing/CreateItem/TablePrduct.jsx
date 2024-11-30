@@ -53,7 +53,7 @@ const ProgressBar = styled(Box)(({ progress }) => ({
   },
 }));
 
-const TableContent = () => {
+const TableProduct = () => {
   const theme = useTheme();
 
   // Sales data
@@ -83,7 +83,7 @@ const TableContent = () => {
         align="center"
         color="white"
         gutterBottom
-        sx={{ fontWeight: "bold", marginBottom: "20px" }}
+        sx={{ fontWeight: "bold", marginBottom: "20px",marginTop:'40px', }}
       >
         Sales Detail
       </Typography>
@@ -132,4 +132,4 @@ const TableContent = () => {
   );
 };
 
-export default TableContent;
+export default TableProduct;

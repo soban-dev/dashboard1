@@ -22,7 +22,7 @@ const TopSection = ({ setItemArray }) => {
       if (query.length === 0) {
         setSuggestions([]);
       } else if (query.length > 1) {
-        const response = await axios.post("http://localhost:3000/api/auth/searchitem", {
+        const response = await axios.post("http://localhost:3000/api/inventory/searchitem", {
           name: query,
         });
         setSuggestions(response.data);
@@ -39,7 +39,7 @@ const TopSection = ({ setItemArray }) => {
 
   const handleSuggestionClick = async (suggestion) => {
     try {
-      const response = await axios.post("http://localhost:3000/api/auth/fetchitem", {
+      const response = await axios.post("http://localhost:3000/api/inventory/fetchitem", {
         name: suggestion.name,
       });
       setSelectedItem(response.data);

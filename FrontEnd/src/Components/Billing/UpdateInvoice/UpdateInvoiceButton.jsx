@@ -6,7 +6,10 @@ const CreateInvoiceButton = () => {
   const [open, setOpen] = useState(false); // Modal open/close state
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  // const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false); // Close the invoice component
+  };
 
   return (
     <Box
@@ -15,7 +18,7 @@ const CreateInvoiceButton = () => {
         flexDirection: "column",
         alignItems: "center", // Center align the content
         justifyContent: "center",
-       // Optional to vertically center on the page
+         // Optional to vertically center on the page
       }}
     >
       {/* Centered Button and Description */}
@@ -48,14 +51,17 @@ const CreateInvoiceButton = () => {
             fontSize: "14px",
           }}
         >
-          Click above to update a old invoice.
+          Click above to update an old invoice.
         </Typography>
       </Box>
 
       {/* Modal containing the CreateInvoice component */}
       <Modal
-        open={open}
-        onClose={handleClose} // Close the modal when backdrop or cross button is clicked
+         open={open}
+         onClose={handleClose}
+         disableAutoFocus
+         disableEnforceFocus
+           // Close the modal when backdrop or cross button is clicked
         sx={{
           display: "flex",
           alignItems: "center",
@@ -65,10 +71,10 @@ const CreateInvoiceButton = () => {
         <Box
   sx={{
     width: "100%",
-    maxWidth: 1200,
-    marginLeft: { xs: "0", md: "220px" }, // Remove marginLeft on tablet and mobile
+    maxWidth: 1000,
+    // marginLeft: { xs: "0", md: "220px" }, // Remove marginLeft on tablet and mobile
     borderRadius: "10px", // Rounded corners
-    padding: { xs: 2, md: 4 }, // Smaller padding for mobile and tablet
+    padding: { xs: 0, md: 0 }, // Smaller padding for mobile and tablet
     height: { xs: "auto", sm: "90vh", md: "auto" }, // Adjust height for smaller screens
   }}
 >

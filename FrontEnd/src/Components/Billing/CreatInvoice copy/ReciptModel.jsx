@@ -28,12 +28,10 @@ const ReceiptModal = ({
   const [message, setMessage] = useState(""); // To store error or success messages
 
   const calculateTotalAmount = () => {
-    return inventory.reduce((total, row) => total + row.totalAmount, 0);
-  };
-  const calculateTotalAmountWithDiscount = () => {
-    const total = inventory.reduce((total, row) => total + row.totalAmount, 0); // Sum up all totalAmount values
-    const discountedTotal = total - (total * discount) / 100; // Apply the discount
-    return discountedTotal.toFixed(2); // Round to two decimal places
+    return inventory.reduce(
+      (total, row) => total + (row.price * (100 - discount ?? 0)) / 100,
+      0
+    );
   };
 
   const handleGenerateReceipt = async () => {
@@ -51,7 +49,7 @@ const ReceiptModal = ({
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/inventory/invoice",
+        "http://localhost:3000/api/auth/generatereceipt",
         data
       );
       console.log("Backend Response:", response.data);
@@ -76,19 +74,16 @@ const ReceiptModal = ({
     >
       <Box
         sx={{
-          width: { xs: "90%", sm: "90%", md: "500px" },
-          marginTop:{ md: "40px" }, // Full width for mobile, fixed width for tablet/desktop
+          width: { xs: "90%", sm: "90%", md: "500px" }, // Full width for mobile, fixed width for tablet/desktop
           maxHeight: "90vh", // Limit height for scrollable content
           bgcolor: "#424242",
           boxShadow: 24,
           p: { xs: 2, md: 4 },
-          // borderRadius: 2,
+          borderRadius: 2,
           overflowY: "auto", // Enable scrolling for long content
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          border:'2px solid #ffffff44',
-          borderRadius:'10px',
         }}
       >
         <Typography
@@ -150,13 +145,13 @@ const ReceiptModal = ({
                   <TableRow key={index}>
                     <TableCell sx={{ color: "white" }}>{row.name}</TableCell>
                     <TableCell align="right" sx={{ color: "white" }}>
-                      ${row.price}
+                      ${row.price_per_unit}
                     </TableCell>
                     <TableCell align="right" sx={{ color: "white" }}>
                       {row.quantity}
                     </TableCell>
                     <TableCell align="right" sx={{ color: "white" }}>
-                      ${row.totalAmount}
+                      ${row.price}
                     </TableCell>
                   </TableRow>
                 ))
@@ -174,9 +169,6 @@ const ReceiptModal = ({
         {/* Total Amount */}
         <Typography variant="h6" align="right" sx={{ mb: 2, color: "white" }}>
           Total: ${calculateTotalAmount()}
-        </Typography>
-        <Typography variant="h6" align="right" sx={{ mb: 2, color: "white" }}>
-          Total After Discount: ${calculateTotalAmountWithDiscount()}
         </Typography>
 
         {/* Error/Success Message */}

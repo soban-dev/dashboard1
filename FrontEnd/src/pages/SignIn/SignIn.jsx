@@ -86,12 +86,12 @@ export default function SignIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     // Save username and password to array (optional step)
     const usersArray = [];
     usersArray.push({ username: formData.username, password: formData.password });
     console.log("Saved User:", usersArray);
-
+  
     // Send data to backend
     try {
       const response = await fetch("http://localhost:3000/api/auth/login", {
@@ -100,15 +100,26 @@ export default function SignIn() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
+        credentials: 'include',  // Important: This sends cookies with the request
       });
-
+  
       const result = await response.json();
       console.log("Response from backend:", result); // Console log response
-
+  
       // Check if the login was successful based on response from backend
       if (result.success === true) {
-        // Navigate to home page if login is successful
-        navigate("/");
+        // Store the role in localStorage or sessionStorage
+        localStorage.setItem("userRole",result.role); // Store the role
+            result.role='admin'
+        // Use role to determine the navigation path
+        if (result.role === "admin") {
+          // Navigate to the homepage if the user is admin
+          navigate("/");
+          console.log(result.role)
+        } else if(result.role === "employee"){
+          // Navigate to billing if the user is not admin
+          navigate("/billing");
+        }
       } else {
         // Handle failed login (optional: display message, etc.)
         console.log("Login failed", result.message);
@@ -117,6 +128,7 @@ export default function SignIn() {
       console.error("Error:", error); // Handle errors during the fetch
     }
   };
+  console.log(localStorage.getItem("userRole"))
 
   return (
     <BackgroundBox>

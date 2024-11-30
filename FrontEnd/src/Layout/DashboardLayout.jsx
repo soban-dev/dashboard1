@@ -5,12 +5,14 @@ import Header from "../Components/header";
 import Sidebar from "../Components/sidebar";
 import DashboardContent from "../pages/Dashboard/DashboardContent";
 import Invoices from "../pages/Billing/BillingContent";
-import TableContent from "../pages/Table/TableContent";
+import TableContent from "../Components/Billing/CreateItem/TablePrduct";
 import ProfileComponent from "../pages/Profile/ProfileContent";
 import NotificationComponent from "../pages/Notification/NotificationContent";
+import CreateItem from "../pages/CreateItem/CreateItem";
 
 function DashboardLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); 
+  const [role, setRole] = useState(false); 
 
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);
@@ -20,7 +22,8 @@ function DashboardLayout() {
     <Box
       sx={{
         display: "flex",
-        flexDirection: "row",
+        justifyContent:"space-between",
+        gap:'20px',
         backgroundColor: "rgb(52, 71, 103)", // Main layout background
         minHeight: "100vh",
         height:'100%',
@@ -37,9 +40,9 @@ function DashboardLayout() {
         sx={{
           display: "flex",
           flexDirection: "column",
-          flexGrow: 1,
           // minHeight: "auto",
           backgroundColor: "rgb(52, 71, 103)",
+          width:'calc(100% - 250px)'
         }}
       >
         {/* Header */}
@@ -53,7 +56,6 @@ function DashboardLayout() {
             display: "flex",
             alignItems: "center",
             boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
-            marginLeft: { xs: 0, md: "250px" },
             borderRadius:'10px',
             // Optional shadow
           }}
@@ -64,12 +66,10 @@ function DashboardLayout() {
         {/* Routes for the Content */}
         <Box 
           sx={{
-            flexGrow: 1,
             // backgroundColor: "rgb(52, 71, 103)",
             color: "#FFF",
             // overflowY: "auto", // Scrollable content
             padding: 3,
-            marginLeft: { xs: 0, md: "250px" },
             marginTop: { xs: 5, },
             // height:'auto',
         
@@ -77,12 +77,11 @@ function DashboardLayout() {
           }}
         >
           <Routes>
-            <Route path="/" element={<DashboardContent />} />
+             <Route path="/" element={<DashboardContent />} />
             <Route path="/billing" element={<Invoices />} />
-            <Route path="/tables" element={<TableContent />} />
+            <Route path="/tables" element={<CreateItem />} /> 
             <Route path="/profile" element={<ProfileComponent />} />
             <Route path="/notifications" element={<NotificationComponent />} />
-            {/* Add additional routes as needed */}
           </Routes>
         </Box>
       </Box>
