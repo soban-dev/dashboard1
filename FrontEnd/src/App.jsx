@@ -10,20 +10,14 @@ function App() {
     <Router>
       <Routes>
         {/* Public Routes */}
+        <Route path="/" element={<SignIn />} /> {/* Default route points to SignIn */}
         <Route path="/sign-up" element={<EmployRegistration />} />
-        {/* Add more public routes like SignUp here */}
         <Route path="/sign-in" element={<SignIn />} />
 
         {/* Private/Dashboard Routes */}
-        <Route path="/*" element={<DashboardLayout />} >
+        <Route path="/*" element={<DashboardLayout />}>
           <Route path="" element={<DashboardContent />} />
           <Route path="billing" element={<Invoices />} />
-          {/* Add more dashboard-related routes here */}
-          {/* <Route path="/" element={<DashboardContent />} />
-            <Route path="/billing" element={<Invoices />} />
-            <Route path="/tables" element={<TableContent />} />
-            <Route path="/profile" element={<ProfileComponent />} />
-            <Route path="/notifications" element={<NotificationComponent />} /> */}
         </Route>
       </Routes>
     </Router>

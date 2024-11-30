@@ -77,7 +77,7 @@ function DashboardLayout() {
           }}
         >
           <Routes>
-             <Route path="/" element={<DashboardContent />} />
+             <Route path="/dashboard" element={<DashboardContent />} />
             <Route path="/billing" element={<Invoices />} />
             <Route path="/tables" element={<CreateItem />} /> 
             <Route path="/profile" element={<ProfileComponent />} />

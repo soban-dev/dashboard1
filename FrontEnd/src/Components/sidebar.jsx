@@ -74,7 +74,7 @@ function SidebarContent({ location, toggleSidebar }) {
 const role = "admin"
   // Define the menu items with their respective roles
   const menuItems = [
-    { text: "Dashboard", icon: <DashboardIcon />, path: "/", role: "admin" },
+    { text: "Dashboard", icon: <DashboardIcon />, path: "/dashboard", role: "admin" },
     { text: "Create Item", icon: <TableChartIcon />, path: "/tables",role: "admin" },
     { text: "Billing", icon: <ReceiptIcon />, path: "/billing", role: "user" },
     { text: "Notifications", icon: <NotificationsIcon />, path: "/notifications", role: "admin" },
