@@ -14,7 +14,7 @@ function Invoices() {
   return (
     <Box
       sx={{
-        backgroundColor: "#2A2D3E",
+        backgroundColor: "rgb(32 41 64)",
         borderRadius: "10px",
         padding: 3,
         color: "#FFF",

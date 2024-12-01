@@ -30,7 +30,7 @@ export default function BillingContent() {
         <Box
           sx={{
             padding: 1.5,
-            backgroundColor: "#2A2D3E",
+            backgroundColor: "rgb(32 41 64)",
             borderRadius: 2,
             display: "flex",
             flexDirection: "column",
@@ -45,7 +45,7 @@ export default function BillingContent() {
         <Box
           sx={{
             padding: 1.5,
-            backgroundColor: "#2A2D3E",
+            backgroundColor: "rgb(32 41 64)",
             borderRadius: 2,
             display: "flex",
             flexDirection: "column",
@@ -60,7 +60,7 @@ export default function BillingContent() {
         <Box
           sx={{
             padding: 1.5,
-            backgroundColor: "#2A2D3E",
+            backgroundColor: "rgb(32 41 64)",
             borderRadius: 2,
             display: "flex",
             flexDirection: "column",

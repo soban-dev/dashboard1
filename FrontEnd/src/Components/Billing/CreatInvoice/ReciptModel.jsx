@@ -26,7 +26,7 @@ const ReceiptModal = ({
   setClientName,
 }) => {
   const [message, setMessage] = useState(""); // To store error or success messages
-
+const token = localStorage.getItem("token")
   const calculateTotalAmount = () => {
     return inventory.reduce((total, row) => total + row.totalAmount, 0);
   };
@@ -50,10 +50,13 @@ const ReceiptModal = ({
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/inventory/invoice",
-        data
+      const response = await axios.post(`${BASE_URL}/api/inventory/invoice`,
+        {
+          data,
+          Authorization:token
+        }
       );
+
       console.log("Backend Response:", response.data);
       setMessage("Receipt generated successfully!");
     } catch (error) {

@@ -65,10 +65,11 @@ const SocialButtonsBox = styled(Box)({
 const SocialButton = styled(Avatar)({
   backgroundColor: "white",
   color: "#1976d2",
-  cursor: "pointer",
+  // cursor: "pointer",
   border: "1px solid #1976d2",
   width: "40px",
   height: "40px",
+  // opacity:'0',
 });
 
 const FormBox = styled(Box)({
@@ -104,17 +105,18 @@ export default function SignIn() {
       });
   
       const result = await response.json();
-      console.log("Response from backend:", result); // Console log response
+      console.log("Response from backend213:", result);
+      localStorage.setItem("token", result.token) // Console log response
   
       // Check if the login was successful based on response from backend
       if (result.success === true) {
         // Store the role in localStorage or sessionStorage
         localStorage.setItem("userRole",result.role); // Store the role
-            result.role='admin'
+            // result.role='admin'
         // Use role to determine the navigation path
         if (result.role === "admin") {
           // Navigate to the homepage if the user is admin
-          navigate("/");
+          navigate("/dashboard");
           console.log(result.role)
         } else if(result.role === "employee"){
           // Navigate to billing if the user is not admin
@@ -129,6 +131,7 @@ export default function SignIn() {
     }
   };
   console.log(localStorage.getItem("userRole"))
+  // console.log(result.role)
 
   return (
     <BackgroundBox>
@@ -181,17 +184,17 @@ export default function SignIn() {
               label="Remember me"
               sx={{ marginTop: 2 }}
             />
-            <Button
+            <Button className="rounded-[10px]"  
               type="submit"
               fullWidth
               variant="contained"
               sx={{
                 marginTop: 2,
                 marginBottom: 2,
-                padding: "10px",
+                
                 backgroundColor: "#1976d2",
                 fontWeight: "bold",
-                borderRadius: "10px",
+                // borderRadius: "10px",
               }}
             >
               SIGN IN

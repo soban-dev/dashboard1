@@ -32,7 +32,7 @@ function Sidebar({ isOpen, toggleSidebar }) {
           "& .MuiDrawer-paper": {
             width: "250px", // Explicit fixed width
             maxWidth: "100%", // Prevent overflow
-            backgroundColor: "#1F2937", // Sidebar background color
+            backgroundColor: "rgb(32 41 64)", // Sidebar background color
             color: "#EDEDED",
             boxSizing: "border-box", // Include padding and border in width
             overflow: "auto", // Prevent scrollbars
@@ -56,7 +56,7 @@ function Sidebar({ isOpen, toggleSidebar }) {
           "& .MuiDrawer-paper": {
             width: "250px", // Explicit fixed width
             maxWidth: "100%", // Prevent overflow
-            backgroundColor: "#1F2937", // Sidebar background color
+            backgroundColor: "rgb(32 41 64)", // Sidebar background color
             color: "#EDEDED",
             boxSizing: "border-box", // Include padding and border in width
             overflow: "hidden", // Prevent scrollbars
@@ -79,8 +79,8 @@ const role = "admin"
     { text: "Billing", icon: <ReceiptIcon />, path: "/billing", role: "user" },
     { text: "Notifications", icon: <NotificationsIcon />, path: "/notifications", role: "admin" },
     { text: "Profile", icon: <PersonIcon />, path: "/profile", role: "user" },
-    { text: "Sign In", icon: <LoginIcon />, path: "/sign-in", role: "user" },
-    { text: "Sign Up", icon: <AppRegistrationIcon />, path: "/sign-up", role: "admin" },
+    { text: "Log Out", icon: <LoginIcon />, path: "/sign-in", role: "user" },
+    // { text: "Sign Up", icon: <AppRegistrationIcon />, path: "/sign-up", role: "admin" },
     
   ];
 

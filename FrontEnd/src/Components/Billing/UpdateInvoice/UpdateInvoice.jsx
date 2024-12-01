@@ -16,6 +16,7 @@ import {
 import axios from "axios";
 import ReceiptModal from "./ReciptModel";
 import backgroundImage from "../../../assets/background.jpg";
+import { BASE_URL } from "../../../config";
 
 
 const CreateInvoice = ({ onClose }) => {
@@ -31,7 +32,7 @@ const CreateInvoice = ({ onClose }) => {
   const [clientName, setClientName] = useState(""); // State for client name
   const [openReceiptModal, setOpenReceiptModal] = useState(false); // State to manage modal visibility
   const [invoiceId, setInvoiceId] = useState("");
-
+const token = localStorage.getItem("token")
   // Fetch suggestions as the user types
   const handleKeyPress1 = (event) => {
     if (event.key === "Enter") {
@@ -47,8 +48,9 @@ const CreateInvoice = ({ onClose }) => {
       if (query.length === 0) {
         setSuggestions([]);
       } else if (query.length > 1) {
-        const response = await axios.post("http://localhost:3000/api/auth/searchitem", {
+        const response = await axios.post(`${BASE_URL}/inventory/searchitem`, {
           name: query,
+          Authorization:token
         });
         setSuggestions(response.data);
       }
@@ -73,8 +75,9 @@ const CreateInvoice = ({ onClose }) => {
   // Fetch item details
   const fetchItemDetails = async (itemName) => {
     try {
-      const response = await axios.post("http://localhost:3000/api/auth/fetchitem", {
+      const response = await axios.post(`${BASE_URL}/inventory/fetchitem`, {
         name: itemName,
+        Authorization:token
       });
       setItemData(response.data);
     } catch (error) {

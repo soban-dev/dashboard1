@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Grid, Card, Typography, LinearProgress, List, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
-import { Line, Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,    // Register "category" scale
@@ -12,6 +11,8 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import TopCards from "../../Components/DashboardContent/TopCards";
+import Charts from "../../Components/DashboardContent/Charts";
 
 ChartJS.register(
   CategoryScale,
@@ -69,130 +70,17 @@ function DashboardContent() {
   return (
     <Box>
       {/* Top Row Cards */}
-      <Grid container spacing={3} mb={4}>
-        {[
-          { title: "Bookings", value: "281", percent: "+55%", description: "than last week", color: "#1E90FF" },
-          { title: "Today's Users", value: "2,300", percent: "+3%", description: "than last month", color: "#36A2EB" },
-          { title: "Revenue", value: "34k", percent: "+1%", description: "than yesterday", color: "#4CAF50" },
-          { title: "Followers", value: "+91", description: "Just updated", color: "#E91E63" },
-        ].map((item, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
-            <Card
-              sx={{
-                backgroundColor: "#2A2D3E",
-                color: "#FFF",
-                padding: 2,
-                borderRadius: 3,
-                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
-              }}
-            >
-              <Box display="flex" justifyContent="space-between">
-                <Box>
-                  <Typography variant="h6" sx={{ fontSize: "16px" }}>
-                    {item.title}
-                  </Typography>
-                  <Typography variant="h4" sx={{ fontSize: "24px", fontWeight: "bold" }}>
-                    {item.value}
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: "#4CAF50" }}>
-                    {item.percent} {item.description}
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    backgroundColor: item.color,
-                    width: 50,
-                    height: 50,
-                    borderRadius: "50%",
-                  }}
-                ></Box>
-              </Box>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+      <TopCards/>
 
       {/* Charts */}
-      <Grid container spacing={3}>
-        {/* Bar Chart */}
-        <Grid item xs={12} md={4}>
-          <Card
-            sx={{
-              backgroundColor: "#2A2D3E",
-              color: "#FFF",
-              padding: 2,
-              borderRadius: 3,
-              boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
-            }}
-          >
-            <Typography variant="h6" mb={2}>
-              Website Views
-            </Typography>
-            <Typography variant="body2" sx={{ color: "#AAA" }} mb={2}>
-              Last Campaign Performance
-            </Typography>
-            <Bar data={barChartData} />
-            <Typography variant="body2" mt={2} sx={{ color: "#AAA" }}>
-              Campaign sent 2 days ago
-            </Typography>
-          </Card>
-        </Grid>
-
-        {/* Line Chart 1 */}
-        <Grid item xs={12} md={4}>
-          <Card
-            sx={{
-              backgroundColor: "#2A2D3E",
-              color: "#FFF",
-              padding: 2,
-              borderRadius: 3,
-              boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
-            }}
-          >
-            <Typography variant="h6" mb={2}>
-              Daily Sales
-            </Typography>
-            <Typography variant="body2" sx={{ color: "#AAA" }} mb={2}>
-              (+15%) increase in today sales.
-            </Typography>
-            <Line data={lineChartData1} />
-            <Typography variant="body2" mt={2} sx={{ color: "#AAA" }}>
-              Updated 4 min ago
-            </Typography>
-          </Card>
-        </Grid>
-
-        {/* Line Chart 2 */}
-        <Grid item xs={12} md={4}>
-          <Card
-            sx={{
-              backgroundColor: "#2A2D3E",
-              color: "#FFF",
-              padding: 2,
-              borderRadius: 3,
-              boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
-            }}
-          >
-            <Typography variant="h6" mb={2}>
-              Completed Tasks
-            </Typography>
-            <Typography variant="body2" sx={{ color: "#AAA" }} mb={2}>
-              Last Campaign Performance
-            </Typography>
-            <Line data={lineChartData2} />
-            <Typography variant="body2" mt={2} sx={{ color: "#AAA" }}>
-              Just updated
-            </Typography>
-          </Card>
-        </Grid>
-      </Grid>
+       <Charts/>
             {/* Bottom Section */}
             <Grid container spacing={3} mt={4}>
         {/* Projects */}
         <Grid item xs={12} md={8}>
           <Card
             sx={{
-              backgroundColor: "#2A2D3E",
+              backgroundColor: "rgb(32 41 64)",
               color: "#FFF",
               padding: 2,
               borderRadius: 3,
@@ -246,7 +134,7 @@ function DashboardContent() {
         <Grid item xs={12} md={4}>
           <Card
             sx={{
-              backgroundColor: "#2A2D3E",
+              backgroundColor: "rgb(32 41 64)",
               color: "#FFF",
               padding: 2,
               borderRadius: 3,

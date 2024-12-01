@@ -16,8 +16,8 @@ function App() {
 
         {/* Private/Dashboard Routes */}
         <Route path="/*" element={<DashboardLayout />}>
-          <Route path="" element={<DashboardContent />} />
-          <Route path="billing" element={<Invoices />} />
+          {/* <Route path="" element={<DashboardContent />} />
+          <Route path="billing" element={<Invoices />} /> */}
         </Route>
       </Routes>
     </Router>

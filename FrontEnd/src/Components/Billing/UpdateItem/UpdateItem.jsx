@@ -15,6 +15,9 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import backgroundImage from "../../../assets/background.jpg";
+import { BASE_URL } from "../../../config";
+import { data } from "react-router-dom";
+
 
 const CreateInvoice = ({ onClose }) => {
   const [searchValue, setSearchValue] = useState(""); // Search input value
@@ -25,22 +28,46 @@ const CreateInvoice = ({ onClose }) => {
   const [enteredQuantity, setEnteredQuantity] = useState(""); // State for the quantity entered
   const [invoiceItems, setInvoiceItems] = useState([]); // State to store the list of items in the invoice
   const inputRef = useRef(null); // Reference to the input field
-  const [clientName, setClientName] = useState(""); // State for client name
-  const [openReceiptModal, setOpenReceiptModal] = useState(false); // State to manage modal visibility
+  
   const [editingIndex, setEditingIndex] = useState(null); // Index of the item being edited
   const [editingQuantity, setEditingQuantity] = useState(""); // The new quantity to update
+  const token= localStorage.getItem('token');
+ const handleUpdateItems = async () => {
+  // Create the payload to send to the backend
+  const updateData = invoiceItems.map((item) => ({
+    name: item.name,
+    quantity: item.quantity,
+  }));
+  
+  try {
+    // Make the API request
+    const response = await axios.post(`${BASE_URL}/inventory/updateitem`, {
+      updateData,
+        Authorization:token
+      },
+    );
 
+    // Log the response from the server
+    console.log("Server Response:", response.data);
+
+    // Optionally, show a success message or refresh the list
+    alert("Items updated successfully!");
+  } catch (error) {
+    // Log any errors
+    console.error("Error updating items:", error);
+    alert("Failed to update items. Please try again.");
+  }
+};
   // Fetch suggestions as the user types
   const fetchSuggestions = async (query) => {
     try {
       if (query.length === 0) {
         setSuggestions([]);
       } else if (query.length > 1) {
-        const response = await axios.post(
-          "http://localhost:3000/api/inventory/searchitem",
-          {
-            name: query,
-          }
+        const response = await axios.post(`${BASE_URL}/inventory/searchitem`, {
+          name: query,
+          Authorization:token
+        },
         );
         setSuggestions(response.data);
       }
@@ -65,13 +92,16 @@ const CreateInvoice = ({ onClose }) => {
   // Fetch item details
   const fetchItemDetails = async (itemName) => {
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/inventory/fetchitem",
-        {
-          name: itemName,
-        }
-      );
-      setItemData(response.data);
+      const response = await axios.post(`${BASE_URL}/inventory/fetchitem`, {
+        name: itemName,
+        credentials: "include",
+        Authorization: token, // Important: This sends cookies with the request
+      });
+  
+      console.log("Fetched Item Details:", response.data);
+  
+      // Add the fetched item to the invoiceItems
+      setInvoiceItems((prevItems) => [...prevItems, response.data]);
     } catch (error) {
       console.error("Error fetching item details:", error);
     }
@@ -100,7 +130,7 @@ const CreateInvoice = ({ onClose }) => {
   };
 
   // Toggle visibility of input field to enter quantity
-  const [isInputVisible, setIsInputVisible] = useState(false);
+  // const [isInputVisible, setIsInputVisible] = useState(false);
 
   // Handle button click to toggle input visibility
   const handleButtonClick = () => {
@@ -232,28 +262,41 @@ const CreateInvoice = ({ onClose }) => {
             invoiceItems.map((item, index) => (
               <TableRow key={index}>
                 <TableCell sx={{ color: "white" }}>{item.name}</TableCell>
-                <TableCell sx={{ color: "white" }}>{item.price_per_unit}</TableCell>
+                <TableCell sx={{ color: "white" }}>{item.selling_price_per_unit}</TableCell>
                 <TableCell
-                  sx={{
-                    color: "white",
-                    cursor: "pointer",
-                    backgroundColor: editingIndex === index ? "#616161" : "transparent",
-                  }}
-                  onClick={() => handleEditQuantity(index, item.quantity)}
-                >
-                  {editingIndex === index ? (
-                    <TextField
-                      value={editingQuantity}
-                      onChange={handleQuantityChange}
-                      onKeyDown={(e) => handleKeyPress(e, index)}
-                      autoFocus
-                      size="small"
-                      sx={{ width: "60px", backgroundColor: "#303030" }}
-                    />
-                  ) : (
-                    item.quantity
-                  )}
-                </TableCell>
+  sx={{
+    color: "white",
+    cursor: "pointer",
+    backgroundColor: editingIndex === index ? "#424242" : "transparent",
+    ":hover": { backgroundColor: "#424242" }, // Optional hover effect
+  }}
+  onClick={() => handleEditQuantity(index, item.quantity)}
+>
+  {editingIndex === index ? (
+    <TextField
+      value={editingQuantity}
+      onChange={handleQuantityChange}
+      onKeyDown={(e) => handleKeyPress(e, index)}
+      autoFocus
+      size="small"
+      variant="outlined"
+      sx={{
+        width: "100px", // Adjust the width
+        height: "40px", // Adjust the height
+        backgroundColor: "#303030", // Background during edit mode
+        color: "white", // Text color
+        borderRadius: "5px", // Rounded corners
+        input: {
+          color: "white", // Ensures the input text is white
+          textAlign: "center", // Center the text
+        },
+      }}
+    />
+  ) : (
+    item.quantity
+  )}
+</TableCell>
+
               </TableRow>
             ))
           )}
@@ -268,7 +311,7 @@ const CreateInvoice = ({ onClose }) => {
             backgroundColor: "#1976d2",
             ":hover": { backgroundColor: "#1565c0" },
           }}
-          onClick={handleButtonClick}
+          onClick={handleUpdateItems}
         >
           Update Item
         </Button>

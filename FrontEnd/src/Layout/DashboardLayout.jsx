@@ -5,7 +5,6 @@ import Header from "../Components/header";
 import Sidebar from "../Components/sidebar";
 import DashboardContent from "../pages/Dashboard/DashboardContent";
 import Invoices from "../pages/Billing/BillingContent";
-import TableContent from "../Components/Billing/CreateItem/TablePrduct";
 import ProfileComponent from "../pages/Profile/ProfileContent";
 import NotificationComponent from "../pages/Notification/NotificationContent";
 import CreateItem from "../pages/CreateItem/CreateItem";
@@ -24,7 +23,7 @@ function DashboardLayout() {
         display: "flex",
         justifyContent:"space-between",
         gap:'20px',
-        backgroundColor: "rgb(52, 71, 103)", // Main layout background
+        backgroundColor: "rgb(26 32 53)", // Main layout background
         minHeight: "100vh",
         height:'100%',
       }}
@@ -41,7 +40,6 @@ function DashboardLayout() {
           display: "flex",
           flexDirection: "column",
           // minHeight: "auto",
-          backgroundColor: "rgb(52, 71, 103)",
           width:'calc(100% - 250px)'
         }}
       >

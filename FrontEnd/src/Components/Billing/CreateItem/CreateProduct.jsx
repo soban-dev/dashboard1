@@ -42,9 +42,19 @@ const CreateProduct = () => {
   };
 
   return (
+    <Box 
+      sx={{
+        background: "rgb(32 41 64)",
+        display: "flex",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        borderRadius:'22px',
+        padding:'25px 0px',
+      }}
+    >
     <Box
   sx={{
-    backgroundImage: `url(${backgroundImage})`,
+    // backgroundImage: `url(${backgroundImage})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
@@ -58,7 +68,8 @@ const CreateProduct = () => {
     margin: "auto", // Automatically centers horizontally
     boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
     borderRadius: "10px",
-    border:'2px solid #444',
+    // border:'2px solid #444',
+    backgroundColor:'rgb(29 35 52 / 90%)',
   }}
 >
       <Typography variant="h4" textAlign="center" sx={{
@@ -153,6 +164,7 @@ const CreateProduct = () => {
       </Button>
       </Box>
     </Box>
+</Box>
   );
 };
 

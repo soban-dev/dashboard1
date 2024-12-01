@@ -14,6 +14,7 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import backgroundImage from "../../assets/bg-reset-cover.jpeg"; // Import your background image
 import avatarImage from "../../assets/team-4.jpg"; // Replace with your avatar image path
+import { BASE_URL } from "../../config";
 
 const ProfileComponent = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -27,7 +28,7 @@ const ProfileComponent = () => {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get("http://localhost3000/profile");
+        const response = await axios.get(`${BASE_URL}/inventory/profile`);
         console.log("Profile Data:", response.data);
       } catch (error) {
         console.error("Error fetching profile data:", error);

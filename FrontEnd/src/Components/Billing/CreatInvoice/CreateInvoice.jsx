@@ -16,6 +16,7 @@ import {
 import axios from "axios";
 import ReceiptModal from "./ReciptModel";
 import backgroundImage from "../../../assets/background.jpg";
+import { BASE_URL } from "../../../config";
 
 
 const CreateInvoice = ({ onClose }) => {
@@ -31,15 +32,24 @@ const CreateInvoice = ({ onClose }) => {
   const [clientName, setClientName] = useState(""); // State for client name
   const [openReceiptModal, setOpenReceiptModal] = useState(false); // State to manage modal visibility
 
+  const token = localStorage.getItem("token")
   // Fetch suggestions as the user types
   const fetchSuggestions = async (query) => {
+
+
+    
     try {
       if (query.length === 0) {
         setSuggestions([]);
       } else if (query.length > 1) {
-        const response = await axios.post("http://localhost:3000/api/inventory/searchitem", {
+        const response = await axios.post(`${BASE_URL}/inventory/searchitem`, {
           name: query,
-        });
+          Authorization:token
+        },
+        {
+          withCredentials: true, // Ensure cookies are sent
+        }
+      );
         setSuggestions(response.data);
       }
     } catch (error) {
@@ -63,10 +73,11 @@ const CreateInvoice = ({ onClose }) => {
   // Fetch item details
   const fetchItemDetails = async (itemName) => {
     try {
-      console.log(credentials)
-      const response = await axios.post("http://localhost:3000/api/inventory/fetchitem", {
+      // console.log(credentials)
+      const response = await axios.post(`${BASE_URL}/inventory/fetchitem`, {
         name: itemName,
-        credentials: 'include',  // Important: This sends cookies with the request
+        credentials: 'include', 
+        Authorization:token // Important: This sends cookies with the request
 
       });
       setItemData(response.data);

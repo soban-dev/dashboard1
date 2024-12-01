@@ -114,9 +114,9 @@ const NotificationComponent = () => {
             <Alert
   key={index}
   sx={{
-    backgroundColor: "#F44336",
+    backgroundColor: "#ff1100a8",
     color: "white",
-    padding: "15px 25px",
+    padding: "7px 25px",
     borderRadius: "10px",
     fontWeight: "bold",
     boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
